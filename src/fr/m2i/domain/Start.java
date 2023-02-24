@@ -10,7 +10,11 @@ public class Start {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		// On crée un nouveau todo
 		TodoList list = new TodoList();
+		
+		// On met la méthode menu dans une variable
 		Integer choice = menu();
 		while (choice != 7) {
 			execution(choice, list);
@@ -18,6 +22,7 @@ public class Start {
 		}
 	}
 	
+	// Création de la méthode menu
 	public static int menu() {
 		Integer choice = 0;
 		
@@ -35,6 +40,7 @@ public class Start {
 		return choice;
 	}
 	
+	// Création de la méthode execution qui prend en paramètre le choix fait ds la méthode menu et exécute la méthode correspondante 
 	public static void execution(int choice, TodoList list) {
 		switch (choice) {
 			case 1 :
@@ -60,6 +66,10 @@ public class Start {
 		}
 	}
 	
+	/**
+	 * Création de la méthode createTodo. 
+	 * @return qui retourne le nouveau Todo avec son niveau d'uegence, titre et description.
+	 */
 	public static Todo createTodo() {
 		System.out.println("Quel est le niveau d'urgence ? 1 = Haute, 2= Normale, 3= Faible");
 		Scanner scanner = new Scanner(System.in);
@@ -78,6 +88,10 @@ public class Start {
 		return result;
 	}
 	
+	/**
+	 * Création de la méthode askForIndex qui demande quel est l'index du todo recherché
+	 * @return retourne l'index recherché
+	 */
 	public static int askForIndex() {
 		System.out.println("Quel index vous intéresse ?");
 		Scanner scanner = new Scanner(System.in);
