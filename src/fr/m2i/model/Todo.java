@@ -8,11 +8,20 @@ package fr.m2i.model;
  */
 
 public class Todo {
-	
+
+	private int id;
 	private Urgence urgence;
 	private String titre;
 	private String description;
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Urgence getUrgence() {
 		return urgence;
 	}
@@ -37,6 +46,11 @@ public class Todo {
 	
 	
 	public Todo(Urgence urg, String tit, String des) {
+		this(0, urg, tit, des);
+	}
+
+	public Todo(int id, Urgence urg, String tit, String des) {
+		setId(id);
 		setUrgence(urg);
 		setTitre(tit);
 		setDescription(des);
@@ -47,6 +61,6 @@ public class Todo {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%s - %s - %s", urgence, titre, description);
+		return String.format("%d - %s - %s - %s", id, urgence, titre, description);
 	}
 }

@@ -1,9 +1,3 @@
-/**
- * 
- */
-/**
- * @author Thomas Le Gloux
- *
- */
 module TodoList {
+    requires java.sql;
 }

@@ -9,8 +9,6 @@ import fr.m2i.model.Urgence;
 public class Start {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
 		// On crée un nouveau todo
 		TodoList list = new TodoList();
 		
@@ -82,7 +80,8 @@ public class Start {
 		System.out.println("Quel est le titre ?");
 		String title = scanner.next();
 		System.out.println("Quel est la description?");
-		String description = scanner.next();
+		scanner.nextLine();
+		String description = scanner.nextLine();
 		
 		Todo result = new Todo(Urgence.values()[choiceUrgence-1], title, description);
 		return result;
