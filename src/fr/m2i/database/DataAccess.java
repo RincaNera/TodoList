@@ -39,6 +39,7 @@ public class DataAccess implements AutoCloseable{
 
     @Override
     public void close() throws Exception {
+        connection.close();
         System.out.println("Closing connection...");
     }
 }

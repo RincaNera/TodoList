@@ -87,7 +87,7 @@ public class TodoList {
         ) {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Todo todo = new Todo(rs.getInt(1), Urgence.values()[rs.getInt(4) - 1], rs.getString(2), rs.getString(3));
+                Todo todo = createTodo(rs);
                 System.out.println(todo);
             }
         } catch (SQLException e) {
@@ -107,7 +107,7 @@ public class TodoList {
             statement.setInt(1, index);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                Todo todo = new Todo(rs.getInt(1), Urgence.values()[rs.getInt(4)], rs.getString(2), rs.getString(3));
+                Todo todo = createTodo(rs);
                 System.out.println(todo);
             }
         } catch (SQLException e) {
@@ -124,11 +124,26 @@ public class TodoList {
         ) {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                Todo todo = new Todo(rs.getInt(1), Urgence.values()[rs.getInt(4)], rs.getString(2), rs.getString(3));
+                Todo todo = createTodo(rs);
                 System.out.println(todo);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Crée un todo à partir d'une entrée de base de données.
+     * @param rs Une entrée de base de données
+     * @return Un Todo
+     * @throws SQLException
+     */
+    private Todo createTodo(ResultSet rs) throws SQLException {
+        return new Todo(
+                rs.getInt(1),
+                Urgence.values()[rs.getInt(4) - 1],
+                rs.getString(2),
+                rs.getString(3)
+        );
     }
 }
