@@ -24,7 +24,8 @@ public class DataAccess implements AutoCloseable{
 
     private void createConnection() {
         try {
-            this.connection = DriverManager.getConnection(HOST, USER, PASSWORD);
+            connection = DriverManager.getConnection(HOST, USER, PASSWORD);
+            connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -35,6 +36,31 @@ public class DataAccess implements AutoCloseable{
             instance = new DataAccess();
         }
         return instance;
+    }
+
+    /**
+     * Commit les changements sur la base de données.
+     */
+    public void commit() {
+        try {
+            this.connection.commit();
+            System.out.println("Successfully committed changes.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Rollback les changements sur la base de données.
+     */
+    public void rollback() {
+        try {
+            this.connection.rollback();
+            System.out.println("Successfully rolled back changes.");
+        } catch (SQLException ex) {
+            System.out.println("Could not rollback changes!");
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override

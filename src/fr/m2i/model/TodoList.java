@@ -40,11 +40,13 @@ public class TodoList {
             statement.setString(2, todo.getDescription());
             statement.setInt(3, todo.getUrgence().ordinal() + 1);
             statement.executeUpdate();
+            db.commit();
             ResultSet rs = statement.getGeneratedKeys();
             if (rs.next()) {
                 todo.setId(rs.getInt(1));
             }
         } catch (SQLException e) {
+            db.rollback();
             throw new RuntimeException(e);
         }
     }
@@ -60,7 +62,9 @@ public class TodoList {
         ) {
             statement.setInt(1, index);
             statement.executeUpdate();
+            db.commit();
         } catch (SQLException e) {
+            db.rollback();
             throw new RuntimeException(e);
         }
     }
@@ -73,7 +77,9 @@ public class TodoList {
                 PreparedStatement statement = db.getConnection().prepareStatement(DELETE_LAST);
         ) {
             statement.executeUpdate();
+            db.commit();
         } catch (SQLException e) {
+            db.rollback();
             throw new RuntimeException(e);
         }
     }
